@@ -24,6 +24,12 @@ asyncBtn.addEventListener('click', () => {
 
 })
 
+store.subscribe(() => {
+    const state = store.getState()
+
+    counter.textContent = state
+})
+
 themeBtn.addEventListener('click', () => {
     //добавляет или удаляет класс dark в body
     //document.body.classList.toggle('dark')
