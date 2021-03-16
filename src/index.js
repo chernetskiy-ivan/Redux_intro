@@ -30,6 +30,9 @@ store.subscribe(() => {
     counter.textContent = state
 })
 
+//чтобы поумолчанию выводился 0
+store.dispatch({type: '__INIT_APPLICATION_'})
+
 themeBtn.addEventListener('click', () => {
     //добавляет или удаляет класс dark в body
     //document.body.classList.toggle('dark')
