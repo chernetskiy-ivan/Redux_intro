@@ -43,16 +43,6 @@ asyncBtn.addEventListener('click', () => {
     store.dispatch(asyncIncrement())
 })
 
-store.subscribe(() => {
-    const state = store.getState()
-
-    counter.textContent = state.counter
-    document.body.className = state.theme.value
-})
-
-//чтобы поумолчанию выводился 0
-store.dispatch({type: '__INIT_APPLICATION_'})
-
 themeBtn.addEventListener('click', () => {
     const newTheme = document.body.classList.contains('light') ? 'dark' : 'light'
     store.dispatch(changeTheme(newTheme))
@@ -60,4 +50,14 @@ themeBtn.addEventListener('click', () => {
     //document.body.classList.toggle('dark')
 })
 
-render()
+store.subscribe(() => {
+    const state = store.getState()
+
+    counter.textContent = state.counter
+    document.body.className = state.theme.value;
+
+    [addBtn, subBtn, themeBtn, asyncBtn].forEach(btn => btn.disabled = state.theme.disabled)
+})
+
+//чтобы поумолчанию выводился 0
+store.dispatch({type: '__INIT_APPLICATION_'})
