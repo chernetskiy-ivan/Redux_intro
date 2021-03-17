@@ -1,7 +1,9 @@
 import './styles.css'
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {rootReducer} from "./redux/rootReducer";
-import {increment, decrement} from './redux/actions.js'
+import {increment, decrement, asyncIncrement} from './redux/actions.js'
+import thunk from 'redux-thunk'
+//объект thunk является объектом middleware
 
 const counter = document.getElementById('counter')
 const addBtn = document.getElementById('add')
@@ -11,20 +13,22 @@ const themeBtn = document.getElementById('theme')
 
 //Очень важно !!!
 //Мы не вызываем rootReducer а передаем как ссылку
-const store = createStore(rootReducer, 0)
+const store = createStore(
+    rootReducer,
+    0,
+    applyMiddleware(thunk)
+)
 
 addBtn.addEventListener('click', () => {
     store.dispatch(increment())
 })
 
 subBtn.addEventListener('click', () => {
-store.dispatch(decrement())
+    store.dispatch(decrement())
 })
 
 asyncBtn.addEventListener('click', () => {
-    setTimeout( () => {
-        store.dispatch(increment())
-    }, 2000)
+    store.dispatch(asyncIncrement())
 })
 
 store.subscribe(() => {
