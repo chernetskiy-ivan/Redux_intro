@@ -11,8 +11,11 @@ function counterReducer(state = 0, action) {
     return state
 }
 
-function themeReducer(state, action) {
+const initialThemeState = {
+    value: 'light'
+}
 
+function themeReducer(state = initialThemeState, action) {
     return state
 }
 

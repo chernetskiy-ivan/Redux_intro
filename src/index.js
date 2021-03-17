@@ -46,7 +46,7 @@ asyncBtn.addEventListener('click', () => {
 store.subscribe(() => {
     const state = store.getState()
 
-    counter.textContent = state.toString()
+    counter.textContent = state.counter
 })
 
 //чтобы поумолчанию выводился 0
