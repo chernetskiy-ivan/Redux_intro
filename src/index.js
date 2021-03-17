@@ -22,7 +22,9 @@ store.dispatch(decrement())
 })
 
 asyncBtn.addEventListener('click', () => {
-
+    setTimeout( () => {
+        store.dispatch(increment())
+    }, 2000)
 })
 
 store.subscribe(() => {
