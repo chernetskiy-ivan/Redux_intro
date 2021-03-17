@@ -14,15 +14,15 @@ const themeBtn = document.getElementById('theme')
 
 //Пишем свой middleware
 //Базовый пример middleware
-function logger(state) {
-    return function(nex) {
-        return function(action) {
-            console.log('State', state)
-            console.log('Action', action)
-            return nex(action)
-        }
-    }
-}
+// function logger(state) {
+//     return function(nex) {
+//         return function(action) {
+//             console.log('State', state)
+//             console.log('Action', action)
+//             return nex(action)
+//         }
+//     }
+// }
 
 //Очень важно !!!
 //Мы не вызываем rootReducer а передаем как ссылку
