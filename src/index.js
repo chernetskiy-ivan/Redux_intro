@@ -1,7 +1,7 @@
 import './styles.css'
 import {createStore, applyMiddleware} from "redux";
 import {rootReducer} from "./redux/rootReducer";
-import {increment, decrement, asyncIncrement} from './redux/actions.js'
+import {increment, decrement, asyncIncrement, changeTheme} from './redux/actions.js'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 //объект thunk является объектом middleware
@@ -47,12 +47,15 @@ store.subscribe(() => {
     const state = store.getState()
 
     counter.textContent = state.counter
+    document.body.className = state.theme.value
 })
 
 //чтобы поумолчанию выводился 0
 store.dispatch({type: '__INIT_APPLICATION_'})
 
 themeBtn.addEventListener('click', () => {
+    const newTheme = document.body.classList.contains('light') ? 'dark' : 'light'
+    store.dispatch(changeTheme(newTheme))
     //добавляет или удаляет класс dark в body
     //document.body.classList.toggle('dark')
 })
