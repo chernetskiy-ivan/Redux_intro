@@ -28,7 +28,6 @@ const themeBtn = document.getElementById('theme')
 //Мы не вызываем rootReducer а передаем как ссылку
 const store = createStore(
     rootReducer,
-    0,
     applyMiddleware(thunk, logger)
 )
 
