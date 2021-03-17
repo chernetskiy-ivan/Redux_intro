@@ -3,6 +3,7 @@ import {createStore, applyMiddleware} from "redux";
 import {rootReducer} from "./redux/rootReducer";
 import {increment, decrement, asyncIncrement} from './redux/actions.js'
 import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 //объект thunk является объектом middleware
 
 const counter = document.getElementById('counter')
@@ -11,12 +12,24 @@ const subBtn = document.getElementById('sub')
 const asyncBtn = document.getElementById('async')
 const themeBtn = document.getElementById('theme')
 
+//Пишем свой middleware
+//Базовый пример middleware
+function logger(state) {
+    return function(nex) {
+        return function(action) {
+            console.log('State', state)
+            console.log('Action', action)
+            return nex(action)
+        }
+    }
+}
+
 //Очень важно !!!
 //Мы не вызываем rootReducer а передаем как ссылку
 const store = createStore(
     rootReducer,
     0,
-    applyMiddleware(thunk)
+    applyMiddleware(thunk, logger)
 )
 
 addBtn.addEventListener('click', () => {
